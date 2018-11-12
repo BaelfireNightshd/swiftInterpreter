@@ -20,7 +20,7 @@ Contains the modules to support the base swift language.
 
 All module names begin with `lang_` 
 
-Each module is named after the section it's found in in swift.org's [Summery of Grammar].
+Each module is named after the section it's found in in swift.org's [Summary of Grammar].
 
 For example, everything defined under **GRAMMAR OF WHITESPACE** should be defined in the file `lang_whitespace.py`
 
