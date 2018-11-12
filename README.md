@@ -6,7 +6,7 @@ Run the python swift interpreter with the following command
 ```
 py swift.py [<*.swift file to be run>]
 ```
-If no *.swift file is given, swift's REPL will start.
+If no \*.swift file is given, swift's REPL will start.
 
 # Project Organization
 ### swift.py
