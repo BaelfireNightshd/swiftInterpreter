@@ -39,10 +39,44 @@ def main(s):
 @pg.production("boolean-literal : FALSE")
 
 # GRAMMAR OF AN INTEGER LITERAL
-@pg.production("integer-literal : BINARY-LITERAL")
-@pg.production("integer-literal : OCTAL-LITERAL")
-@pg.production("integer-literal : DECIMAL-LITERAL")
-@pg.production("integer-literal : HEXADECIMAL-LITERAL")
+@pg.production("integer-literal : binary-literal")
+@pg.production("integer-literal : octal-literal")
+@pg.production("integer-literal : decimal-literal")
+@pg.production("integer-literal : hexadecimal-literal")
+
+@pg.production("binary-literal : BINARY-LITERAL-PREFIX BINARY-LITERAL-DIGIT")
+@pg.production("binary-literal : BINARY-LITERAL-PREFIX BINARY-LITERAL-DIGIT binary-literal-characters")
+# BINARY-DIGIT in lexer
+@pg.production("binary-literal-character : BINARY-LITERAL-DIGIT")
+@pg.production("binary-literal-character : UNDERSCORE")
+@pg.production("binary-literal-characters : binary-literal-character")
+@pg.production("binary-literal-characters : binary-literal-character binary-literal-characters")
+
+@pg.production("octal-literal : OCTAL-LITERAL-PREFIX OCTAL-LITERAL-DIGIT")
+@pg.production("octal-literal : OCTAL-LITERAL-PREFIX OCTAL-LITERAL-DIGIT octal-literal-characters")
+# OCTAL-DIGIT in lexer
+@pg.production("octal-literal-character : OCTAL-LITERAL-DIGIT")
+@pg.production("octal-literal-character : UNDERSCORE")
+@pg.production("octal-literal-characters : octal-literal-character")
+@pg.production("octal-literal-characters : octal-literal-character octal-literal-characters")
+
+@pg.production("decimal-literal : DECIMAL-LITERAL-DIGIT")
+@pg.production("decimal-literal : DECIMAL-LITERAL-DIGIT decimal-literl-characters")
+# DECIMAL-DIGIT in lexer
+@pg.production("decimal-literal-digits : DECIMAL-LITERAL-DIGIT")
+@pg.production("decimal-literal-digits : DECIMAL-LITERAL-DIGIT decimal-literal-digitis")
+@pg.production("decimal-literal-character : DECIMAL-LITERAL-DIGIT")
+@pg.production("decimal-literal-character : UNDERSCORE")
+@pg.production("decimal-literal-characters : decimal-literal-character")
+@pg.production("decimal-literal-characters : decimal-literal-character decimal-literal-characters")
+
+@pg.production("hexadecimal-literal : HEXADECIMAL-LITERAL-PREFIX HEXADECIMAL-LITERAL-DIGIT")
+@pg.production("hexadecimal-literal : HEXADECIMAL-LITERAL-PREFIX HEXADECIMAL-LITERAL-DIGIT hexadecimal-literal-characters")
+# HEXADECIMAL-DIGIT in lexer
+@pg.production("hexadecimal-literal-character : HEXADECIMAL-LITERAL-DIGIT")
+@pg.production("hexadecimal-literal-character : UNDERSCORE")
+@pg.production("hexadecimal-literal-characters : hexadecimal-literal-character")
+@pg.production("hexadecimal-literal-characters : hexadecimal-literal-character hexadecimal-literal-characters")
 
 # GRAMMAR OF A FLOATING-POINT LITERAL
 @pg.production("floating-point-literal : ")
