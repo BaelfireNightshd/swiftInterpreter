@@ -8,7 +8,20 @@ pg = ParserGenerator([
 'SEMICOLON',
 'TRUE',
 'FALSE',
-'NIL-LITERAL'
+'NIL-LITERAL',
+'PLUS',
+'MINUS',
+'BINARY-LITERAL-PREFIX',
+'BINARY-LITERAL-DIGIT',
+'UNDERSCORE',
+'OCTAL-LITERAL-PREFIX',
+'OCTAL-LITERAL-DIGIT',
+'DECIMAL-LITERAL-DIGIT',
+'HEXADECIMAL-LITERAL-PREFIX',
+'HEXADECIMAL-LITERAL-DIGIT',
+'PERIOD',
+'FLOATING-POINT-E',
+'FLOATING-POINT-P',
 ], cache_id="swiftLang"
 )
 
@@ -33,7 +46,9 @@ def main(s):
 @pg.production("literal : NIL-LITERAL")
 
 @pg.production("numeric-literal : integer-literal")
+@pg.production("numeric-literal : MINUS integer-literal")
 @pg.production("numeric-literal : floating-point-literal")
+@pg.production("numeric-literal : MINUS floating-point-literal")
 
 @pg.production("boolean-literal : TRUE")
 @pg.production("boolean-literal : FALSE")
@@ -61,7 +76,7 @@ def main(s):
 @pg.production("octal-literal-characters : octal-literal-character octal-literal-characters")
 
 @pg.production("decimal-literal : DECIMAL-LITERAL-DIGIT")
-@pg.production("decimal-literal : DECIMAL-LITERAL-DIGIT decimal-literl-characters")
+@pg.production("decimal-literal : DECIMAL-LITERAL-DIGIT decimal-literal-characters")
 # DECIMAL-DIGIT in lexer
 @pg.production("decimal-literal-digits : DECIMAL-LITERAL-DIGIT")
 @pg.production("decimal-literal-digits : DECIMAL-LITERAL-DIGIT decimal-literal-digitis")
@@ -79,7 +94,25 @@ def main(s):
 @pg.production("hexadecimal-literal-characters : hexadecimal-literal-character hexadecimal-literal-characters")
 
 # GRAMMAR OF A FLOATING-POINT LITERAL
-@pg.production("floating-point-literal : ")
+@pg.production("floating-point-literal : decimal-literal")
+@pg.production("floating-point-literal : decimal-literal decimal-fraction")
+@pg.production("floating-point-literal : decimal-literal decimal-exponent")
+@pg.production("floating-point-literal : decimal-literal decimal-fraction decimal-exponent")
+@pg.production("floating-point-literal : hexadecimal-literal hexadecimal-exponent")
+@pg.production("floating-point-literal : hexadecimal-literal hexadecimal-fraction hexadecimal-exponent")
+
+@pg.production("decimal-fraction : PERIOD decimal-literal")
+@pg.production("decimal-exponent : FLOATING-POINT-E decimal-literal")
+@pg.production("decimal-exponent : FLOATING-POINT-E sign decimal-literal")
+
+@pg.production("hexadecimal-fraction : PERIOD HEXADECIMAL-LITERAL-DIGIT")
+@pg.production("hexadecimal-fraction : PERIOD HEXADECIMAL-LITERAL-DIGIT hexadecimal-literal-characters")
+@pg.production("hexadecimal-exponent : FLOATING-POINT-P decimal-literal")
+@pg.production("hexadecimal-exponent : FLOATING-POINT-P sign decimal-literal")
+#FLOATING-POINT-E in lexer
+#FLOATING-POINT-P in lexer
+@pg.production("sign : PLUS")
+@pg.production("sign : MINUS")
 
 # GRAMMAR OF A STRING LITERAL
 # GRAMMAR OF OPERATORS
