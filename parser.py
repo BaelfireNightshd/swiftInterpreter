@@ -109,8 +109,8 @@ def main(s):
 @pg.production("hexadecimal-fraction : PERIOD HEXADECIMAL-LITERAL-DIGIT hexadecimal-literal-characters")
 @pg.production("hexadecimal-exponent : FLOATING-POINT-P decimal-literal")
 @pg.production("hexadecimal-exponent : FLOATING-POINT-P sign decimal-literal")
-#FLOATING-POINT-E in lexer
-#FLOATING-POINT-P in lexer
+# FLOATING-POINT-E in lexer
+# FLOATING-POINT-P in lexer
 @pg.production("sign : PLUS")
 @pg.production("sign : MINUS")
 
