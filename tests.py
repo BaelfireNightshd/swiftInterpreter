@@ -47,25 +47,30 @@ class TestLexerIntegerLiteral(unittest.TestCase):
         self.assertEqual(t.name, "BINARY-LITERAL")
         self.assertEqual(t.value, "0b1")
 
-        stream = lexer.lex("0b0_")
+        stream = lexer.lex("0b2")
         t = stream.next()
-        self.assertEqual(t.name, "BINARY-LITERAL")
-        self.assertEqual(t.value, "0b0_")
+        self.assertNotEqual(t.name, "BINARY-LITERAL")
+        self.assertNotEqual(t.value, "0b2")
 
-        stream = lexer.lex("0b1_")
+        stream = lexer.lex("0ba")
         t = stream.next()
-        self.assertEqual(t.name, "BINARY-LITERAL")
-        self.assertEqual(t.value, "0b1_")
+        self.assertNotEqual(t.name, "BINARY-LITERAL")
+        self.assertNotEqual(t.value, "0ba")
 
-        stream = lexer.lex("0b0_1____")
+        stream = lexer.lex("0b0__________")
         t = stream.next()
         self.assertEqual(t.name, "BINARY-LITERAL")
-        self.assertEqual(t.value, "0b0_1____")
+        self.assertEqual(t.value, "0b0__________")
 
-        stream = lexer.lex("0b1_0______")
+        stream = lexer.lex("0b00000000000")
         t = stream.next()
         self.assertEqual(t.name, "BINARY-LITERAL")
-        self.assertEqual(t.value, "0b1_0______")
+        self.assertEqual(t.value, "0b00000000000")
+
+        stream = lexer.lex("0b11111111111")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b11111111111")
 
 
 
@@ -125,6 +130,11 @@ class TestLexerIntegerLiteral(unittest.TestCase):
         t = stream.next()
         self.assertNotEqual(t.name, "OCTAL-LITERAL")
         self.assertNotEqual(t.value, "0o8")
+
+        stream = lexer.lex("0oa")
+        t = stream.next()
+        self.assertNotEqual(t.name, "OCTAL-LITERAL")
+        self.assertNotEqual(t.value, "0oa")
 
         stream = lexer.lex("0o0__________")
         t = stream.next()
