@@ -21,7 +21,48 @@ class TestLexerWhitespace(unittest.TestCase):
         self.assertEqual(t.name, "LINE-BREAK")
         self.assertEqual(t.value, "\u000d\u000a")
 
+class TestLexerIntegerLiteral(unittest.TestCase):
 
+    def test_binary_literal(self):
+        stream = lexer.lex("0b")
+        t = stream.next()
+        self.assertNotEqual(t.name, "BINARY-LITERAL")
+        self.assertNotEqual(t.value, "0b")
+
+        stream = lexer.lex("0b_")
+        t = stream.next()
+        self.assertNotEqual(t.name, "BINARY-LITERAL")
+        self.assertNotEqual(t.value, "0b_")
+
+        stream = lexer.lex("0b0")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b0")
+
+        stream = lexer.lex("0b1")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b1")
+
+        stream = lexer.lex("0b0_")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b0_")
+
+        stream = lexer.lex("0b1_")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b1_")
+
+        stream = lexer.lex("0b0_1____")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b0_1____")
+
+        stream = lexer.lex("0b1_0______")
+        t = stream.next()
+        self.assertEqual(t.name, "BINARY-LITERAL")
+        self.assertEqual(t.value, "0b1_0______")
 
 if __name__ == '__main__':
     unittest.main()
