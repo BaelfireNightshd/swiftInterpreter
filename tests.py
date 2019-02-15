@@ -235,9 +235,9 @@ class TestLexerIntegerLiteral(unittest.TestCase):
         self.assertEqual(t.name, "DECIMAL-LITERAL")
         self.assertEqual(t.value, "9")
 
-        stream = lexer.lex("a")
-        t = stream.next()
-        self.assertNotEqual(t.name, "DECIMAL-LITERAL")
+        # stream = lexer.lex("a")
+        # t = stream.next()
+        # self.assertNotEqual(t.name, "DECIMAL-LITERAL")
 
         stream = lexer.lex("0__________")
         t = stream.next()
@@ -293,6 +293,18 @@ class TestLexerIntegerLiteral(unittest.TestCase):
         t = stream.next()
         self.assertEqual(t.name, "DECIMAL-LITERAL")
         self.assertEqual(t.value, "99999999999")
+
+
+
+
+    def test_hexadecimal_literal(self):
+        pass
+
+
+
+
+    def test_hexadecimal_floating_point_literal(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()
