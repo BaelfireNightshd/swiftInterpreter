@@ -298,7 +298,238 @@ class TestLexerIntegerLiteral(unittest.TestCase):
 
 
     def test_hexadecimal_literal(self):
-        pass
+        stream = lexer.lex("0x")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-LITERAL")
+
+        stream = lexer.lex("0x_")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-LITERAL")
+
+        stream = lexer.lex("0x0")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x0")
+
+        stream = lexer.lex("0x1")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x1")
+
+        stream = lexer.lex("0x2")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x2")
+
+        stream = lexer.lex("0x3")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x3")
+
+        stream = lexer.lex("0x4")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x4")
+
+        stream = lexer.lex("0x5")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x5")
+
+        stream = lexer.lex("0x6")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x6")
+
+        stream = lexer.lex("0x7")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x7")
+
+        stream = lexer.lex("0x8")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x8")
+
+        stream = lexer.lex("0x9")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x9")
+
+        stream = lexer.lex("0xa")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xa")
+
+        stream = lexer.lex("0xb")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xb")
+
+        stream = lexer.lex("0xc")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xc")
+
+        stream = lexer.lex("0xd")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xd")
+
+        stream = lexer.lex("0xe")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xe")
+
+        stream = lexer.lex("0xf")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xf")
+
+        stream = lexer.lex("0xA")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xA")
+
+        stream = lexer.lex("0xB")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xB")
+
+        stream = lexer.lex("0xC")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xC")
+
+        stream = lexer.lex("0xD")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xD")
+
+        stream = lexer.lex("0xE")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xE")
+
+        stream = lexer.lex("0xF")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xF")
+
+        stream = lexer.lex("0x0__________")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x0__________")
+
+        stream = lexer.lex("0x00000000000")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x00000000000")
+
+        stream = lexer.lex("0x11111111111")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x11111111111")
+
+        stream = lexer.lex("0x22222222222")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x22222222222")
+
+        stream = lexer.lex("0x33333333333")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x33333333333")
+
+        stream = lexer.lex("0x44444444444")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x44444444444")
+
+        stream = lexer.lex("0x55555555555")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x55555555555")
+
+        stream = lexer.lex("0x66666666666")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x66666666666")
+
+        stream = lexer.lex("0x77777777777")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x77777777777")
+
+        stream = lexer.lex("0x88888888888")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x88888888888")
+
+        stream = lexer.lex("0x99999999999")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0x99999999999")
+
+        stream = lexer.lex("0xaaaaaaaaaaa")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xaaaaaaaaaaa")
+
+        stream = lexer.lex("0xbbbbbbbbbbb")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xbbbbbbbbbbb")
+
+        stream = lexer.lex("0xccccccccccc")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xccccccccccc")
+
+        stream = lexer.lex("0xddddddddddd")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xddddddddddd")
+
+        stream = lexer.lex("0xeeeeeeeeeee")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xeeeeeeeeeee")
+
+        stream = lexer.lex("0xfffffffffff")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xfffffffffff")
+
+        stream = lexer.lex("0xAAAAAAAAAAA")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xAAAAAAAAAAA")
+
+        stream = lexer.lex("0xBBBBBBBBBBB")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xBBBBBBBBBBB")
+
+        stream = lexer.lex("0xCCCCCCCCCCC")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xCCCCCCCCCCC")
+
+        stream = lexer.lex("0xDDDDDDDDDDD")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xDDDDDDDDDDD")
+
+        stream = lexer.lex("0xEEEEEEEEEEE")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xEEEEEEEEEEE")
+
+        stream = lexer.lex("0xFFFFFFFFFFF")
+        t = stream.next()
+        self.assertEqual(t.name, "HEXADECIMAL-LITERAL")
+        self.assertEqual(t.value, "0xFFFFFFFFFFF")
 
 
 
