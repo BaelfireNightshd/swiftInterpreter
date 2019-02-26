@@ -13,8 +13,11 @@ lg.add("BINARY-LITERAL", r"0b[01][01_]*")
 lg.add("OCTAL-LITERAL", r"0o[0-7][0-7_]*")
 lg.add("HEXADECIMAL-FLOATING-POINT-LITERAL", r"0x[0-9a-fA-F][0-9a-fA-F_]*(\.[0-9a-fA-F][0-9a-fA-F_]*)?[pP]-?\d[\d_]*")
 lg.add("HEXADECIMAL-LITERAL", r"0x[0-9a-fA-F][0-9a-fA-F_]*")
+#   Technically DECIMAL-LITERALS also qualify for DECIMAL-FLOATING-POINT-LITERALS
+#   but that creates a conflict between two of the regex, so I will just exclude
+#   them from the regex and take care of it in parser.
+lg.add("DECIMAL-FLOATING-POINT-LITERAL", r"\d[\d_]*((\.\d[\d_]*[eE]-?\d[\d_]*)|(\.\d[\d_]*)|([eE]-?\d[\d_]*))")
 lg.add("DECIMAL-LITERAL", r"\d[\d_]*")
-lg.add("DECIMAL-FLOATING-POINT-LITERAL", r"\d[\d_]*(\.\d[\d_]*)?([eE]-?\d[\d_]*)?")
 lg.add("PLUS", r"\+")
 lg.add("MINUS", r"-")
 lg.add("UNDERSCORE", r"_")
