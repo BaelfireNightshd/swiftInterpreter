@@ -533,6 +533,209 @@ class TestLexerIntegerLiteral(unittest.TestCase):
 
 
 
+class TestLexerFloatingPointLiteral(unittest.TestCase):
+
+    def test_decimal_floating_point_literal(self):
+        stream = lexer.lex("_.0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0._")
+        t = stream.next()
+        self.assertNotEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex(".0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0.")
+        t = stream.next()
+        self.assertNotEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0.0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0.0")
+
+        stream = lexer.lex("1.1")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "1.1")
+
+        stream = lexer.lex("2.2")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "2.2")
+
+        stream = lexer.lex("3.3")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "3.3")
+
+        stream = lexer.lex("4.4")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "4.4")
+
+        stream = lexer.lex("5.5")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "5.5")
+
+        stream = lexer.lex("6.6")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "6.6")
+
+        stream = lexer.lex("7.7")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "7.7")
+
+        stream = lexer.lex("8.8")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "8.8")
+
+        stream = lexer.lex("9.9")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "9.9")
+
+        stream = lexer.lex("0_.0_")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0_.0_")
+
+        stream = lexer.lex("0e0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0e0")
+
+        stream = lexer.lex("0e+0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0e+0")
+
+        stream = lexer.lex("0e-0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0e-0")
+
+        stream = lexer.lex("1e1")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "1e1")
+
+        stream = lexer.lex("2e2")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "2e2")
+
+        stream = lexer.lex("3e3")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "3e3")
+
+        stream = lexer.lex("4e4")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "4e4")
+
+        stream = lexer.lex("5e5")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "5e5")
+
+        stream = lexer.lex("6e6")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "6e6")
+
+        stream = lexer.lex("7e7")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "7e7")
+
+        stream = lexer.lex("8e8")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "8e8")
+
+        stream = lexer.lex("9e9")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "9e9")
+
+        stream = lexer.lex("0E0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0E0")
+
+        stream = lexer.lex("0.0e0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0.0e0")
+
+        stream = lexer.lex("1.1e1")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "1.1e1")
+
+        stream = lexer.lex("2.2e2")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "2.2e2")
+
+        stream = lexer.lex("3.3e3")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "3.3e3")
+
+        stream = lexer.lex("4.4e4")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "4.4e4")
+
+        stream = lexer.lex("5.5e5")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "5.5e5")
+
+        stream = lexer.lex("6.6e6")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "6.6e6")
+
+        stream = lexer.lex("7.7e7")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "7.7e7")
+
+        stream = lexer.lex("8.8e8")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "8.8e8")
+
+        stream = lexer.lex("9.9e9")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "9.9e9")
+
+        stream = lexer.lex("0.0E0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0.0E0")
+
+        stream = lexer.lex("0.0e+0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0.0e+0")
+
+        stream = lexer.lex("0.0e-0")
+        t = stream.next()
+        self.assertEqual(t.name, "DECIMAL-FLOATING-POINT-LITERAL")
+        self.assertEqual(t.value, "0.0e-0")
 
     def test_hexadecimal_floating_point_literal(self):
         pass
