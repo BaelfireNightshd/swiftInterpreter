@@ -738,7 +738,90 @@ class TestLexerFloatingPointLiteral(unittest.TestCase):
         self.assertEqual(t.value, "0.0e-0")
 
     def test_hexadecimal_floating_point_literal(self):
-        pass
+        goodCharacters = "0123456789abcdefABCDEF"
+        goodExponents = "0123456789"
+        stream = lexer.lex("0x_.0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x0._")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x.0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x0.")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x_.0p0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x0._p0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x.0p0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        stream = lexer.lex("0x0.p0")
+        t = stream.next()
+        self.assertNotEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+
+        for c in goodCharacters:
+            for e in goodExponents:
+                testString = "0x" + c + "p" + e
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c * 2 + "p" + e * 2
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c + "_p" + e + "_"
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c + "P" + e
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c + "." + c + "p" + e
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c * 2 + "." + c * 2 + "p" + e * 2
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c + "_." + c + "_p" + e + "_"
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
 
 if __name__ == '__main__':
     unittest.main()
