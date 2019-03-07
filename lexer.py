@@ -5,6 +5,7 @@ from rply import LexerGenerator
 lg = LexerGenerator()
 
 lg.add("LINE-BREAK", r"\u000D\u000A|\u000A|\u000D")     # U+000A or U+000D or U+000D U+000A
+lg.add("COMMENT", r"\/\/.*")  # //
 lg.add("SEMICOLON", r";")
 lg.add("TRUE", r"true")
 lg.add("FALSE", r"false")

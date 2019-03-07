@@ -21,6 +21,18 @@ class TestLexerWhitespace(unittest.TestCase):
         self.assertEqual(t.name, "LINE-BREAK")
         self.assertEqual(t.value, "\u000d\u000a")
 
+    def test_comment(self):
+        testString = "// this is a comment \n// this is another comment"
+        stream = lexer.lex(testString)
+        t = stream.next()
+        self.assertEqual(t.name, "COMMENT")
+        self.assertEqual(t.value, "// this is a comment ")
+        t = stream.next()
+        self.assertEqual(t.name, "LINE-BREAK")
+        t = stream.next()
+        self.assertEqual(t.name, "COMMENT")
+        self.assertEqual(t.value, "// this is another comment")
+
 
 
 
