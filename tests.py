@@ -781,6 +781,20 @@ class TestLexerFloatingPointLiteral(unittest.TestCase):
                     self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
                     self.assertEqual(t.value, testString)
 
+                testString = "0x" + c + "p+" + e
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
+                testString = "0x" + c + "p-" + e
+                with self.subTest(i=testString):
+                    stream = lexer.lex(testString)
+                    t = stream.next()
+                    self.assertEqual(t.name, "HEXADECIMAL-FLOATING-POINT-LITERAL")
+                    self.assertEqual(t.value, testString)
+
                 testString = "0x" + c * 2 + "p" + e * 2
                 with self.subTest(i=testString):
                     stream = lexer.lex(testString)
