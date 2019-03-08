@@ -59,6 +59,16 @@ class TestLexerWhitespace(unittest.TestCase):
         self.assertEqual(t.name, "COMMENT")
         self.assertEqual(t.value, "// this is another comment")
 
+    def test_multiline_comment_head_and_tail(self):
+        stream = lexer.lex("/*")
+        t = stream.next()
+        self.assertEqual(t.name, "MULTILINE-COMMENT-HEAD")
+        self.assertEqual(t.value, "/*")
+
+        stream = lexer.lex("*/")
+        t = stream.next()
+        self.assertEqual(t.name, "MULTILINE-COMMENT-TAIL")
+        self.assertEqual(t.value, "*/")
 
 
 
