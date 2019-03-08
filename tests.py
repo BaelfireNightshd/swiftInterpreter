@@ -5,6 +5,32 @@ import unittest
 
 class TestLexerWhitespace(unittest.TestCase):
 
+    def test_whitespace_character(self):
+        stream = lexer.lex("\u0000")
+        t = stream.next()
+        self.assertEqual(t.name, "WHITESPACE-CHARACTER")
+        self.assertEqual(t.value, '\u0000')
+
+        stream = lexer.lex("\u0009")
+        t = stream.next()
+        self.assertEqual(t.name, "WHITESPACE-CHARACTER")
+        self.assertEqual(t.value, '\u0009')
+
+        stream = lexer.lex("\u000B")
+        t = stream.next()
+        self.assertEqual(t.name, "WHITESPACE-CHARACTER")
+        self.assertEqual(t.value, '\u000B')
+
+        stream = lexer.lex("\u000C")
+        t = stream.next()
+        self.assertEqual(t.name, "WHITESPACE-CHARACTER")
+        self.assertEqual(t.value, '\u000C')
+
+        stream = lexer.lex("\u0020")
+        t = stream.next()
+        self.assertEqual(t.name, "WHITESPACE-CHARACTER")
+        self.assertEqual(t.value, '\u0020')
+
     def test_line_break(self):
         stream = lexer.lex("\u000a")
         t = stream.next()

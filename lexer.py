@@ -4,6 +4,7 @@ from rply import LexerGenerator
 
 lg = LexerGenerator()
 
+lg.add("WHITESPACE-CHARACTER", r"[\u0000\u0009\u000B\u000C\u0020]")
 lg.add("LINE-BREAK", r"\u000D\u000A|\u000A|\u000D")     # U+000A or U+000D or U+000D U+000A
 lg.add("COMMENT", r"\/\/.*")  # //
 lg.add("SEMICOLON", r";")
