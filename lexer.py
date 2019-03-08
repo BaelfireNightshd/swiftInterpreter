@@ -29,6 +29,18 @@ lg.add("PERIOD", r"\.")
 lg.add("FLOATING-POINT-E", r"[eE]")
 lg.add("FLOATING-POINT-P", r"[pP]")
 
+# constructing the identifier grammar
+
+regex_identifier_head_options = r"a-zA-Z"
+regex_identifier_head_options += r"_"
+regex_identifier_head_options += r"\u00A8\u00AA\u00AD\u00AF\u00B2-\u00B5\u00B7-\u00BA"
+regex_identifier_head_options += r"\u00BC-\u00BE\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF"
+regex_identifier_head_options += r"\u0100-\u02FF\u0370-\u167F\u1681-\u181D\u180F-\u1DBF"
+regex_identifier_head_options += r"\u1E00-\u1FFF"
+regex_identifier_head_options += r"\u200B-\u200D\u202A-\u202E\u203F-\u2040\u2054\u2060-\u206F"
+regex_identifier_head_options += r"\u2070-\u20CF\u2100-\u218F\u2460-\u24FF\u2776-\u2793"
+regex_identifier_head_options += r"\u2C00-\u2DFF\u2E80-\u2FFF"
+regex_identifier_head_options += r"\u3004-\u3007\u3021-\u302F\u3031-\u303F\u3040-\uD7FF"
 
 lexer = lg.build()
 
