@@ -62,25 +62,9 @@ def main(s):
 @pg.production("integer-literal : HEXADECIMAL-LITERAL")
 
 # GRAMMAR OF A FLOATING-POINT LITERAL
-@pg.production("floating-point-literal : decimal-literal")
-@pg.production("floating-point-literal : decimal-literal decimal-fraction")
-@pg.production("floating-point-literal : decimal-literal decimal-exponent")
-@pg.production("floating-point-literal : decimal-literal decimal-fraction decimal-exponent")
-@pg.production("floating-point-literal : hexadecimal-literal hexadecimal-exponent")
-@pg.production("floating-point-literal : hexadecimal-literal hexadecimal-fraction hexadecimal-exponent")
-
-@pg.production("decimal-fraction : PERIOD decimal-literal")
-@pg.production("decimal-exponent : FLOATING-POINT-E decimal-literal")
-@pg.production("decimal-exponent : FLOATING-POINT-E sign decimal-literal")
-
-@pg.production("hexadecimal-fraction : PERIOD HEXADECIMAL-LITERAL-DIGIT")
-@pg.production("hexadecimal-fraction : PERIOD HEXADECIMAL-LITERAL-DIGIT hexadecimal-literal-characters")
-@pg.production("hexadecimal-exponent : FLOATING-POINT-P decimal-literal")
-@pg.production("hexadecimal-exponent : FLOATING-POINT-P sign decimal-literal")
-# FLOATING-POINT-E in lexer
-# FLOATING-POINT-P in lexer
-@pg.production("sign : PLUS")
-@pg.production("sign : MINUS")
+@pg.production("floating-point-literal : DECIMAL-LITERAL")
+@pg.production("floating-point-literal : DECIMAL-FLOATING-POINT-LITERAL")
+@pg.production("floating-point-literal : HEXADECIMAL-FLOATING-POINT-LITERAL")
 
 # GRAMMAR OF A STRING LITERAL
 # GRAMMAR OF OPERATORS
